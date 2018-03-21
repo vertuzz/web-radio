@@ -1,5 +1,5 @@
-import core.web
+from core.web import app
 from bottle import run
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080)
+    run(app, host='localhost', port=8080, debug=True)
