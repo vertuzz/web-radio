@@ -6,13 +6,22 @@
 
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Radio</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <div class="container">
+        <h2>Current playlist</h2>
 
-    <script src="/static/js/jquery-3.2.1.slim.min.js" ></script>
-    <script src="/static/js/popper.min.js" ></script>
-    <script src="/static/js/bootstrap.min.js"></script>
+        <textarea class="form-control" id="current_playlist" rows="15"></textarea>
+
+
+        <button type="button" class="btn btn-success" id="updatePlaylist">Update</button>
+
+    </div>
+
+    <script src="/static/js/lib/jquery-3.3.1.min.js" ></script>
+    <script src="/static/js/lib/popper.min.js" ></script>
+    <script src="/static/js/lib/bootstrap.min.js"></script>
+    <script src="/static/js/core.js"></script>
   </body>
 </html>

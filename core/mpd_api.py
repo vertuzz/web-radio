@@ -1,3 +1,4 @@
+import os
 from mpd import MPDClient
 
 
@@ -7,16 +8,19 @@ class MPD:
         self.client = MPDClient()
 
     def _get_client(self):
-
+        """
+        Connects to mpd server and returns client
+        :return:
+        """
         client = self.client
 
-        client.connect("192.168.0.107", 6600)
+        client.connect(os.environ.get("MPD_HOST", "localhost"), 6600)
 
         return client
 
     def get_playlist(self):
         client = self._get_client()
-        playlist = client.playlist()
+        playlist = client.playlistid()
         client.disconnect()
         return playlist
 
@@ -25,3 +29,16 @@ class MPD:
         playlistinfo = client.playlistinfo()
         client.disconnect()
         return playlistinfo
+
+    def set_playlist(self, playlist):
+        """
+        Clear and set new playlist
+        :param playlist: array of radio urls
+        :return:
+        """
+        client = self._get_client()
+        client.clear()
+        for uri in playlist:
+            client.add(uri)
+        client.disconnect()
+        return True

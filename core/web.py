@@ -1,4 +1,5 @@
-from bottle import default_app, template, TEMPLATE_PATH, static_file
+import json
+from bottle import default_app, template, TEMPLATE_PATH, static_file, request
 from mpd_api import MPD
 
 app = default_app()
@@ -16,4 +17,17 @@ def server_static(filepath):
 @app.route('/')
 def index():
     return template('index.tpl')
+
+
+@app.route('/get_curr_playlist')
+def get_curr_playlist():
+    playlist = mpd.get_playlist()
+    return json.dumps(playlist)
+
+
+@app.route('/set_playlist', method="POST")
+def set_playlist():
+    playlist = json.loads(request.body.buf)
+    mpd.set_playlist(playlist)
+    return 'ok'
 
